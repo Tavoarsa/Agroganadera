@@ -22,7 +22,7 @@
 
 
      
-                    <button class= "btn btn-info" data-toggle="modal" data-target="#nuevo" >Nuevo Inyección</button>
+                     <a href="{{ url('/injection/create') }}" class="btn btn-info" role="button">Nueva Inyecion</a>      
 
        
                      {!!Form::open(['route'=>'injection.show','method'=>'GET', 'class'=>'navbar-form navbar-left pull-right', 'role'=>'search'])!!}
@@ -35,45 +35,6 @@
                           <button class= "btn btn-info" type="submit">Buscar</button> 
                            {!!Form::close()!!}
                             </div>
-
-
-
-
-
-                   <!--.........................................................................................................................-->
-                   
-                    
-
-
-
-                    
-     <!--.........................................................................................................................-->                   
-
-                    <div class="modal fade" id="nuevo" tabindex= "-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
-                            <div class="modal-dialog">
-
-                                         <div class="modal-content">
-
-                                             <div class="modal-header">
-                                                <button type="button" class="close" data-dismiis="modal" aria-hidden="true">&times;</button>
-                                                <h4>Nueva Inyección</h4>
-
-                                             </div>
-                                             <div class="modal-body">
-
-                                               <!--@include('partials.messages')-->                                             
-
-                    
-                                             {!! Form::open(['route' => 'injection.store', 'method' => 'POST', 'files' => 'true']) !!}
-                                                @include('injections.partials.fields')                                                        
-                                                <button type="submit" class="btn btn-default">Guardar Inyección</button>
-                                            {!! Form::close() !!}
-                                             </div>
-                                        </div>
-                             </div>    
-                    </div>
-                       
                    
                     <div class="panel-body">
 

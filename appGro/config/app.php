@@ -148,7 +148,8 @@ return [
 		'App\Providers\RouteServiceProvider',
 		'Torann\GeoIP\GeoIPServiceProvider',
 		'Laravel\Socialite\SocialiteServiceProvider',
-		'Intervention\Image\ImageServiceProvider'
+		'Intervention\Image\ImageServiceProvider',
+		'Barryvdh\DomPDF\ServiceProvider'
 		
 
 

@@ -7,7 +7,7 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">    
-                        <button class= "btn btn-info" data-toggle="modal" data-target="#nuevo" >Nuevo Vacuna</button>       
+                        <a href="{{ url('/vaccine/create') }}" class="btn btn-info" role="button">Nueva Vacuna</a>      
 
                         {!!Form::open(['route'=>'vaccine.show','method'=>'GET', 'class'=>'navbar-form navbar-left pull-right', 'role'=>'search'])!!}
 
@@ -18,30 +18,8 @@
 
                         {!!Form::close()!!}
                     </div>
-<!--.........................................................................................................................-->
-                   
-                                     
-     
-
-    <div class="modal fade" id="nuevo" tabindex= "-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiis="modal" aria-hidden="true">&times;</button>
-                    <h4>Nueva Vacuna</h4>
-
                 </div>
-                    <div class="modal-body">
-                      <!--@include('partials.messages')-->                                             
-                        {!! Form::open(['route' => 'vaccine.store', 'method' => 'POST', 'files' => 'true']) !!}
-                        @include('vaccines.partials.fields')                                                        
-                        <button type="submit" class="btn btn-default">Guardar Vacuna</button>
-                        {!! Form::close() !!}
-                    </div>
-            </div>
-        </div>    
-    </div>
- <!--.........................................................................................................................-->
+
                       
     <div class="panel-body">
 
@@ -52,7 +30,7 @@
                         <img src="/img/vaccines/{{$vaccine->image}}" alt="{{$vaccine->name}}">                                 
                             <div class="caption">
                                 <a href="{{url('vaccine/show1', $vaccine->id) }}">
-                                <h3 >{{$vaccine->name}}</h3>
+                                <h3 >{{$vaccine->nameV}}</h3>
                                 </a>
                             </div>
                     </div>

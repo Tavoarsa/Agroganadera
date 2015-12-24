@@ -1,9 +1,10 @@
- <div class= "alert alert-danger " role=" alert">
-     @if($errors->any())                                                    
-        <p>Revisar los siguientes Campos</p>
-                    
-        @foreach($errors->all() as $error)
-            <li> {{ $error }}</li>
-        @endforeach                                                
-     @endif
-</div>
+@if($errors->has())
+    <div class='alert alert-danger'>
+        @foreach ($errors->all('<p>:message</p>') as $message)
+            {!! $message !!}
+        @endforeach
+    </div>
+@endif
+@if (Session::has('message'))
+    <div class="alert alert-success">{{ Session::get('message') }}</div>
+@endif

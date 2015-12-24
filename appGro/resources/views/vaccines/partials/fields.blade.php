@@ -1,40 +1,57 @@
 <div class="form-group">
-    {!! form::label('name','Nombre')!!}
+    {!! form::label('nameV','Nombre')!!}
     {!! form::text('name',null,['class' => 'form-control']) !!}
 </div>
+
+ <div class="form-group">
+    {!!Form::label('idProvider', 'Proveedor')!!}
+    {!!Form::select('idProvider',$providers,["class" => "form-control"])!!}
+</div> 
+
 <div class="form-group">
     {!! form::label('indications','Indicaciones')!!}
-    {!! form::textarea('indications',null,['class' => 'form-control']) !!}
+    {!! form::text('indications',null,['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
     {!! form::label('Dosage','Posoligia')!!}
-    {!! form::textarea('Dosage',null,['class' => 'form-control']) !!}
+    {!! form::text('Dosage',null,['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
     {!! form::label('composition','Composición')!!}
-    {!! form::textarea('composition',null,['class' => 'form-control']) !!}
+    {!! form::text('composition',null,['class' => 'form-control']) !!}
 </div>
-<div class="form-group">
-    {!! form::label('indications','Indicaciones')!!}
-    {!! form::textarea('indications',null,['class' => 'form-control']) !!}
-</div>
+
 <div class="form-group">
     {!! form::label('application','Aplicaciones')!!}
-    {!! form::textarea('application',null,['class' => 'form-control']) !!}
+    {!! form::text('application',null,['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
     {!! form::label('precautions','Precauciones')!!}
-    {!! form::textarea('precautions',null,['class' => 'form-control']) !!}
+    {!! form::text('precautions',null,['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
     {!! form::label('effects','Efectos')!!}
-    {!! form::textarea('effects',null,['class' => 'form-control']) !!}
+    {!! form::text('effects',null,['class' => 'form-control']) !!}
+</div>
+<div class="form-group">
+    {!! form::label('sizes','Tamaño')!!}
+    {!! form::text('sizes',null,['class' => 'form-control']) !!}
+</div>
+<div class="form-group">
+    {!! form::label('prices','Precio')!!}
+    {!! form::text('prices',null,['class' => 'form-control']) !!}
 </div>
 
-<div class="form-group">
+ {!!Form::label('due_date', 'Fecha Vencimiento')!!}
+  <div class='input-group date' id='due_date'>
+ {!! Form::input('text', 'due_date',null,['class'=>'form-control']) !!}
+ <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+ </div>
+
+ <div class="form-group">
     {!! form::label('image','Imagen')!!}   
     {!! form::file('image',null,['class' => 'form-control']) !!}
 </div>
-
-
+            
+ 
 

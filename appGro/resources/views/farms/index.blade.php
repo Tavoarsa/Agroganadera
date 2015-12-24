@@ -16,8 +16,10 @@
                                 <div class="thumbnail">
                                       
                                       <img src="/img/patent/{{$farm->patent}}" alt="{{$farm->name}}">
+
                                  
                                     <div class="caption">
+                                     <a href="{{url('farm/show', $farm->id) }}">
                                         
                                         <h3 >{{$farm->name}}</h3>
                                          </a>

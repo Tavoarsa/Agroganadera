@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 
 use App\Injection;
 use App\Defoult;
+use App\Provider;
 use Input;
+
+use Auth;
 
 use Illuminate\Http\Request;
 //inyeccion de dependencias
@@ -21,7 +24,8 @@ class InjecctionController extends Controller {
 
 	public function index() {
 
-		$injections = Injection::all();
+		$injections = Injection::where('idUser',Auth::id())-> get();
+
 		return view('injections.index', compact('injections'));
 
 	}
@@ -32,7 +36,8 @@ class InjecctionController extends Controller {
 	 * @return Response
 	 */
 	public function create() {
-		return view('injections.create');
+		$providers= Provider::all()->lists('name','id');
+		return view('injections.create',compact('providers'));
 	}
 
 	/**
@@ -40,7 +45,7 @@ class InjecctionController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store() {
+	public function store(Request $request) {
 
 		if (Input::hasFile('image')) {
 			$file = Input::file('image');
@@ -48,19 +53,30 @@ class InjecctionController extends Controller {
 			$image = \Image::make(\Input::file('image'));
 			//Ruta donde queremos guardar las imagenes
 			$path = 'img/injections/';
-
-			// Guardar Original
-			//$image->save($path.$file->getClientOriginalName());
 			// Cambiar de tamaño
 			$image -> resize(450, 450);
 			$image -> save($path . $file -> getClientOriginalName());
-			// Guardar
-			//$image->save($path.'injec_'.$file->getClientOriginalName());
-
+			//Guardar imagen.
 			//Guardamos nombre y nombreOriginal en la BD
 			$injection = new Injection();
+			$injection -> idUser = Auth::id();
+			$injection -> idProvider = $request->idProvider;
 			$injection -> name = Input::get('name');
-			$injection -> descrition = Input::get('descrition');
+			$injection -> indications = Input::get('indications');
+			$injection -> Dosage = Input::get('Dosage');
+			$injection -> composition = Input::get('composition');
+			$injection -> application = Input::get('application');
+			$injection -> precautions = Input::get('precautions');
+			$injection -> effects = Input::get('effects');
+
+			$injection-> size=Input::get('sizes');
+			$injection-> price =Input::get('prices');
+			
+			$price_ml= $request->prices/$request->sizes;	
+			
+			$injection-> price_ml=$price_ml;
+			$injection-> due_date=Input::get('due_date');
+
 			$injection -> image = $file -> getClientOriginalName();
 			$injection -> save();
 
@@ -68,14 +84,27 @@ class InjecctionController extends Controller {
 
 		}
 
-	
 
-		
 		$default = Defoult::where('name', 'injection') -> pluck('image');
 
 		$injection = new Injection();
+		$injection -> idUser = Auth::id();
+		$injection -> idProvider = $request->idProvider;
 		$injection -> name = Input::get('name');
-		$injection -> descrition = Input::get('descrition');
+		$injection -> indications = Input::get('indications');
+		$injection -> Dosage = Input::get('Dosage');
+		$injection -> composition = Input::get('composition');
+		$injection -> application = Input::get('application');
+		$injection -> precautions = Input::get('precautions');
+		$injection -> effects = Input::get('effects');
+
+		$injection-> size=Input::get('sizes');
+		$injection-> price =Input::get('prices');
+			
+		$price_ml= $request->prices/$request->sizes;	
+			
+		$injection-> price_ml=$price_ml;
+		$injection-> due_date=Input::get('due_date');
 		$injection -> image = $default;
 		$injection -> save();
 
@@ -143,8 +172,10 @@ class InjecctionController extends Controller {
 	 * @return Response
 	 */
 	public function edit($id) {
+		
 		$injection = Injection::findOrFail($id);
-		return view('injections.edit', compact('injection'));
+		$providers= Provider::all()->lists('name','id');
+		return view('injections.edit', compact('injection','providers'));
 	}
 
 	/**
@@ -153,7 +184,7 @@ class InjecctionController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id) {
+	public function update($id, Request $request) {
 
 		$injection = Injection::findOrFail($id);
 		if (Input::hasFile('image')) {
@@ -174,20 +205,41 @@ class InjecctionController extends Controller {
 			//$image->save($path.'injec_'.$file->getClientOriginalName());
 
 			//Guardamos nombre y nombreOriginal en la BD
-
 			$injection -> name = Input::get('name');
-			$injection -> descrition = Input::get('descrition');
-			$injection -> image = $file -> getClientOriginalName();
-			$injection -> save();
+			$injection -> indications = Input::get('indications');
+			$injection -> Dosage = Input::get('Dosage');
+			$injection -> composition = Input::get('composition');
+			$injection -> application = Input::get('application');
+			$injection -> precautions = Input::get('precautions');
+			$injection -> effects = Input::get('effects');
 
+			$injection-> size=Input::get('sizes');
+			$injection-> price=Input::get('prices');
+			//dd($request->price);
+			$price_ml= $request->prices/$request->sizes;		
+			$injection-> price_ml=$price_ml;
+			$injection-> due_date=Input::get('due_date');		
+			$injection -> image = $file -> getClientOriginalName();
+			$injection -> save();			
 			return redirect() -> route('injection.index');
 
 		}
 
 		$file = Injection::where('id', $id) -> pluck('image');
 
+	
 		$injection -> name = Input::get('name');
-		$injection -> descrition = Input::get('descrition');
+		$injection -> indications = Input::get('indications');
+		$injection -> Dosage = Input::get('Dosage');
+		$injection -> composition = Input::get('composition');
+		$injection -> application = Input::get('application');
+		$injection -> precautions = Input::get('precautions');
+		$injection -> effects = Input::get('effects');
+		$injection -> size=Input::get('sizes');
+		$injection -> price=Input::get('prices');
+		$price_ml = $request->prices/$request->sizes;
+		$injection -> price_ml=$price_ml;
+		$injection -> due_date=Input::get('due_date');	
 		$injection -> image = $file;
 		$injection -> save();
 

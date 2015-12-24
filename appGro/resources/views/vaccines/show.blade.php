@@ -49,7 +49,7 @@
                                     <img src="/img/vaccines/{{$vaccine->image}}" alt="{{$vaccine->name}}">
                                 
                                     <div class="caption">
-                                        <h3 >{{$vaccine->name}}</h3>
+                                        <h3 >{{$vaccine->nameV}}</h3>
                                         <h3>{{$vaccine->indications}}</h3>
                                         <p><a class="btn btn-primary" href="{{url('vaccines/edit', $vaccine->id) }}">Editar</a> </p>
 

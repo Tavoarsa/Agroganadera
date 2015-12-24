@@ -86,8 +86,8 @@
                             				<td>{{$diseases->name }}</td>
                             				<td>{{$diseases->description }}</td>
                             				<td>{{$diseases->symptom }}</td>
-                            				<td>{{$diseases->vaccinationAge }}</td>
-                            				<td>{{$diseases->boosterInjection }}</td>
+                            				<td>{{$diseases->vaccinationAge }}mes</td>
+                            				<td>{{$diseases->boosterInjection }}mes</td>
 
                             			</tr>
                             			@endforeach    

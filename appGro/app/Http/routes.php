@@ -31,15 +31,43 @@ Route::controllers([
 
 
 Route::resource('animal','AnimalController');
+Route::get('animal/control_animal/{id}','AnimalController@control_animal');
+Route::get('animal/registro_sanitario/vaccine/{id}','AnimalController@registro_sanitario_vaccine');
+Route::get('animal/registro_sanitario/injection/{id}','AnimalController@registro_sanitario_injection');
+
+Route::post('animal/registro_sanitario/ejecutar_vacunas','AnimalController@ejecutar_vacunas');
+Route::post('animal/peso/ejecutar_peso','AnimalController@ejecutar_peso');
+Route::post('animal/registro_sanitario/ejecutar_injection','AnimalController@ejecutar_injection');
+Route::post('animal/control_alimenticio/ejecutar_alimento','AnimalController@ejecutar_alimento');
+
+
+Route::get('animal/milk_production/list_milk_production/{id}','AnimalController@redirect_milk_production');
+Route::get('animal/milk_production/ejecutar_milk_production/{id}','Milk_production@edit');
+Route::get('animal/milk_production/{id}','AnimalController@milk_production');
+
+
+Route::get('animal/peso/{id}','AnimalController@peso');
+Route::get('animal/control_alimenticio/{id}','AnimalController@control_alimenticio');
+//Reportes
+Route::resource('report','ReportController');
+Route::get('report/create/{id}','ReportController@create');
+
+
 
 //Disease
 
 Route::resource('disease','DiseaseController');
 
+//Providers
+Route::resource('provider','ProviderController');
+Route::get('provider/edit/{id}','ProviderController@edit');
+
 
 
 //Farm
 Route::resource('farm','FarmController');
+Route::get('farm/edit/{id}','FarmController@edit');
+Route::get('farm/show/{id}','FarmController@show');
       
 
 //Injection
@@ -53,6 +81,14 @@ Route::get('injection/show1/{id}','InjecctionController@show1');
 Route::resource('vaccine','VaccineController');
 Route::get('vaccine/edit/{id}','VaccineController@edit');
 Route::get('vaccine/show1/{id}','VaccineController@show1');
+
+//food__supplements
+
+Route::resource('food__supplement','food__supplementsController');
+Route::get('food__supplements/edit/{id}','food__supplementsController@edit');
+Route::get('food__supplements/show1/{id}','food__supplementsController@show1');
+
+
 
 //Mail
 Route::get('sendemail', function () {

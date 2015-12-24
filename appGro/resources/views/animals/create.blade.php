@@ -8,45 +8,14 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Home</div>
  
-                @if($errors->has())
-                    <div class='alert alert-danger'>
-                        @foreach ($errors->all('<p>:message</p>') as $message)
-                            {!! $message !!}
-                        @endforeach
-                    </div>
-                @endif
- 
-				@if (Session::has('message'))
-				    <div class="alert alert-success">{{ Session::get('message') }}</div>
-				@endif
-
-				<script>
-
-				function readURL(input) { 
-
-
-					if (input.files && input.files[0]) { 
-
-						var reader = new FileReader(); 
-						reader.onload = function (e) { 
-							$('#blah').attr('src', e.target.result);
-							 } 
-
-							 reader.readAsDataURL(input.files[0]); 
-							}
-						} 
-						$("#image").change(function(){ readURL(this); });
-
-
-
-
-				</script>
+                @include('partials.messages')
+			
  
 				<div class="panel-body">
 					{!! Form::open(['route' => 'animal.store','class' =>'form','novalidate' =>'novalidate','files' => true]) !!}
  							<div class="form-group">
 								{!!Form::label('numeroAnimal', 'Numero Animal')!!}
-								{!! Form::text('numeroAnimal', $numeroAnimal, array("class" => "form-control", 'placeholder' => 'Ejemplo:0001')) !!}
+								{!! Form::text('numeroAnimal',null, array("class" => "form-control", 'placeholder' => 'Ejemplo:0001')) !!}
 							</div>
 
 							<div class="form-group">
@@ -74,6 +43,7 @@
 								{!!Form::label('genero', 'Genero')!!}
 								{!! Form::select('genero', array('hembra' => 'Hembra', 'macho' => 'Macho'), 'Hembra',["class" => "form-control"])!!}
 							</div>
+							
 							 {!!Form::label('fechaNacimiento', 'Fecha Nacimiento')!!}
 							 <div class='input-group date' id='fechaNacimiento'>
 
@@ -88,10 +58,7 @@
 								{!! Form::text('pesoNacimiento', null,array("class" => "form-control", 'placeholder' => 'Peso en Kilogramos')) !!}
 							</div>
 
-							<!--<div class="form-group">
-								{!!Form::label('fechaMuerte', 'Fecha Muerte')!!}
-								{!! Form::input('date', 'fechaMuerte') !!}
-							</div>-->
+							
 
 							<div class="form-group">
 								{!!Form::label('observaciones', 'Observaciones')!!}
@@ -126,5 +93,5 @@
                      });
 
         </script>
-</div>
+
 @endsection

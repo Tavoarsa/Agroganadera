@@ -9,7 +9,7 @@
                     <div class="panel-heading">
                         <a href="{{ url('/vaccine') }}" class="btn btn-info" role="button">Listado de Vacunas</a>
 
-                        Editar Vacuna:  {{$vaccine->name }}
+                        Editar Vacuna:  {{$vaccine->nameV }}
                     </div>
                     <div class="panel-body">
                         <!--@include('partials.messages')--> 

@@ -14,13 +14,15 @@
 
                             <div class="col-sm-6 col-md-4">
                                 <div class="thumbnail">
+                                <h3>{{$animal->nombre}}</h3>
                                       
-                                      <img src="/img/animal/{{$animal->image}}" alt="{{$animal->nombre}}">
+                                       <a  href="{{url('animal/control_animal',$animal->id) }}">
+                                            <img src="/img/animal/{{$animal->image}}" alt="{{$animal->nombre}}">
+                                        </a> 
                                  
                                     <div class="caption">
-                                        <a>
-                                       
-                                         </a>
+                                    
+                                        
 
                                     </div>
                                 </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Disease;
+use Auth;
 
 class DiseaseController extends Controller {
 
@@ -23,7 +24,7 @@ class DiseaseController extends Controller {
 
 	public function index()
 	{
-		$diseases=Disease::all();		
+		$diseases=Disease::where('idUser',Auth::id())->get();		
 		return view('diseases.index',compact('diseases'));
 	}
 
@@ -34,7 +35,7 @@ class DiseaseController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('disease.store');
 	}
 
 	/**
@@ -44,8 +45,29 @@ class DiseaseController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		$disease = new \App\Disease($request->all());
-		$disease->save();
+
+				$rules =array(
+
+
+				'name'	 		 	=> 'required',	
+				'description'  					=> 'required',		
+				'symptom'						=> 'required',
+				'genero'					=> 'required',
+				'vaccinationAge'			=> 'required|integer',
+				'boosterInjection'			=> 'required|integer',
+					
+
+				);
+			$this->validate($request,$rules);
+			
+		$disease = new Disease();
+		$disease->idUser=Auth::id();
+		$disease->name= $request->name;
+		$disease->description=$request->description;
+		$disease->symptom=$request->symptom;
+		$disease->vaccinationAge=$request->vaccinationAge;
+		$disease->boosterInjection=$request->boosterInjection;
+		$disease->save();		
 		return redirect() -> route('disease.index');
 	}
 
